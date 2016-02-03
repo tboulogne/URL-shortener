@@ -31,4 +31,15 @@ class HomepageController extends Controller
         }
     }
 
+    public function dashboard()
+    {
+        $links = new LinksController;
+        $links = $links->index();
+        $data  = json_decode($links->getContent(), true);
+        $data  = [
+            'links' => $data['data'],
+        ];
+        return View::make('front.dashboard.index', $data);
+    }
+
 }
