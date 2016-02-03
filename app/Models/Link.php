@@ -55,6 +55,7 @@ class Link extends Model
             $this->url         = $data['url'];
             $this->description = (!empty($data['description'])) ? $data['description'] : null;
             $this->shorten_url = $this->getShortenUrl();
+            $this->clicks      = 0;
             $this->save();
             return [
                 'status' => 'success',
