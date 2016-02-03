@@ -35,7 +35,7 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'getLogout']);
-        $this->loginPath    = URL::route('homepage');
+        $this->loginPath    = URL::route('signin.index');
         $this->redirectPath = URL::route('signup.index');
     }
 
@@ -69,4 +69,10 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    public function getLogin()
+    {
+        return view('front.homepage.index');
+    }
+
 }
