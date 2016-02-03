@@ -9,8 +9,10 @@
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the controller to call when that URI is requested.
 |
-*/
+ */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix' => 'api'], function () {
+    Route::get('/links', ['as' => 'links.index', 'uses' => 'Api\LinksController@index']);
+    Route::get('/links/{short_url}', ['as' => 'links.show', 'uses' => 'Api\LinksController@show']);
+    Route::post('/links', ['as' => 'links.store', 'uses' => 'Api\LinksController@store']);
 });
