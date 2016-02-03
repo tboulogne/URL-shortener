@@ -64,6 +64,11 @@ class Link extends Model
         }
     }
 
+    public function getByUser()
+    {
+        return $this->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
+    }
+
     protected function getShortenUrl()
     {
         $shorten_url = '';

@@ -19,7 +19,8 @@ class LinksController extends Controller
 
     public function index()
     {
-        return "Index of all links";
+        $link = $this->links->getByUser();
+        return $this->result->make($link, null, 200);
     }
 
     public function show($short_url)
