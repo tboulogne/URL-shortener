@@ -1,0 +1,21 @@
+.navbar {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    background: #fff;
+}
+.navbar-contain {
+    padding: 13px 20px;
+}
+.navbar-contain a {
+    display: inline-block;
+    padding: 5px 16px;
+    color: #F60;
+    font-weight: bold;
+}
+.navbar-contain a:hover {
+    background: #314649;
+    color: #fff;
+    text-decoration: none;
+}
