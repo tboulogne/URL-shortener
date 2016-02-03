@@ -11,10 +11,10 @@ use Illuminate\Http\Request;
  */
 class LinksController extends Controller
 {
-    public function __construct(Link $links, Result $result)
+    public function __construct()
     {
-        $this->links  = $links;
-        $this->result = $result;
+        $this->links  = new Link;
+        $this->result = new Result;
     }
 
     public function index()
@@ -36,8 +36,17 @@ class LinksController extends Controller
         $req->all();
         $link = $this->links->store($req->all());
         if ($link['status'] == 'success') {
+
             return $this->result->make($link['data'], null, 200);
         }
         return $this->result->make($link['data'], null, 400);
     }
+
+    public function updateCounter($id)
+    {
+        $link         = $this->links->find($id);
+        $link->clicks = $link->clicks + 1;
+        $link->save();
+    }
+
 }
