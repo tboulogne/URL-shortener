@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simple URL Shortener</title>
+	{{html_style('bootstrap/css/bootstrap.css')|raw}}
+	{{html_style('bootstrap/css/style.css')|raw}}
+	{{html_script('https://code.jquery.com/jquery-2.2.0.min.js')|raw}}
+	{{html_script('bootstrap/js/bootstrap.min.js')|raw}}
+	{% block assets %}{% endblock %}
+
+</head>
+<body>
+	{% block mainContent %}{% endblock %}
+</body>
+</html>

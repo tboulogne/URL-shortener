@@ -1,0 +1,48 @@
+{% extends 'front.template.homepage' %}
+
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-lg-offset-3">
+				<div class="well" style="margin-top:100px">
+					<div class="row">
+						<div class="col-lg-12 text-center">
+							<img src="{{url_to('/')}}/images/logo.png" >
+							<br/>
+							<br/>
+							Shorten & Tracks your URL just in second
+							<hr/>
+						</div>
+					</div>
+					<div class="message-area"> </div>
+					{{form_open({'url':url_route('links.store'), 'class':'shorten_url'})|raw}}
+						<div class="row">
+							<div class="col-lg-9">
+								<div class="form-group">
+									<label for="url">Your URL</label>
+									{{form_url('url', null, {'class':'form-control input-lg', 'id':'url'})|raw}}
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="form-group">
+									{{form_submit('Shorten!', {'class':'btn btn-shorten btn-lg btn-warning', 'style':'    margin-top: 24px;'})|raw}}
+								</div>
+							</div>
+						</div>
+					{{form_close()|raw}}
+					<div class="message-success">
+					</div>
+
+				</div>
+				{% if auth_user() is empty %}
+					<div class="well">
+						<div class="row">
+							<div class="col-lg-6"><a href="{{url_route('signin.index')}}" class="btn btn-default btn-block btn-lg">Sign In</a></div>
+							<div class="col-lg-6"><a href="{{url_route('signup.index')}}" class="btn btn-primary btn-block btn-lg">Sign Up</a></div>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

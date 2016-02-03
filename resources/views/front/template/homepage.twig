@@ -1,0 +1,50 @@
+{% extends 'front.template.base' %}
+
+{% block assets %}
+	{{html_script('https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js')|raw}}
+	<script type="text/javascript">
+	$(function () {
+		$.backstretch("images/background.png");
+		$('.shorten_url').submit(function(e) {
+			$('.btn-shorten').button('loading');
+			$('.message-area, .message-success').html('');
+			e.preventDefault();
+			$.ajax({
+				type: "POST",
+				data: $(this).serialize(),
+				url: $(this).attr('action'),
+				success: function(msg){
+					var URL = window.location.href + msg.data.shorten_url;
+					$('.message-success').html('<div class="alert alert-success alertSuccess"></div>')
+					// console.log(URL);
+					$('.alertSuccess').html('<a href="'+URL+'" target="_blank">'+URL
+						+'</a><hr/><h3>'+msg.data.clicks+' Clicks</h3>');
+				},
+				error:function(msg) {
+					var error = JSON.parse(msg['responseText']);
+					$('.message-area').html('<div class="alert alert-danger alertMessage"></div>')
+					for (var i = 0; i < error['data'].length; i++) {
+						$('.alertMessage').append('<li>'+error['data'][i]+'</li>');
+					};
+				},
+				complete:function() {
+					$('.btn-shorten').button('reset');
+				}
+			});
+		});
+	});
+	</script>
+{% endblock %}
+
+{% block mainContent %}
+	{% block content %}{% endblock %}
+	{% if auth_user() %}
+		<div class="navbar">
+			<div class="navbar-contain">
+				<a href="{{url_route('homepage')}}">Generate new URL</a>
+				<a href="{{url_route('dashboard')}}">Dashboard</a>
+				<a href="{{url_route('user.signout')}}">Signout</a>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

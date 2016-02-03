@@ -1,0 +1,39 @@
+{% extends 'front.template.homepage' %}
+
+{% block content %}
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="well">
+						<div class="page-header">
+							<h2>Dashboard</h2>
+						</div>
+						<table class="table">
+							<thead>
+								<th> URL </th>
+								<th> Shorten </th>
+								<th> Clicks </th>
+							</thead>
+							<tbody>
+								{% if links %}
+									{% for l in links %}
+										<tr>
+											<td><a target="_blank" href="{{l.url}}">{{l.url}}</a></td>
+											<td><a target="_blank" href="{{url_route('shorten.redirect', l.shorten_url)}}">{{l.shorten_url}}</a></td>
+											<td>{{l.clicks}}</td>
+										</tr>
+									{% endfor %}
+								{% else %}
+									<tr>
+										<td colspan="3">
+											No data.
+										</td>
+									</tr>
+								{% endif %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}
